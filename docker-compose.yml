@@ -1,0 +1,52 @@
+services:
+  hyperf:
+    image: hyperf/hyperf:8.2-alpine-v3.18-swoole
+    container_name: hyperf
+    working_dir: /data/project/hyperf-skeleton
+    volumes:
+      - ./:/data/project/hyperf-skeleton
+    ports:
+      - "9501:9501"
+      - "9500:9500"
+    user: root
+    tty: true
+    stdin_open: true
+    depends_on:
+      - mysql
+      - redis
+      - mongo
+
+  mysql:
+    image: mysql:8.0
+    container_name: hyperf-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: hyperf_db
+      MYSQL_USER: hyperf
+      MYSQL_PASSWORD: hyperf
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  redis:
+    image: redis:7-alpine
+    container_name: hyperf-redis
+    ports:
+      - "6379:6379"
+
+  mongo:
+    image: mongo:7
+    container_name: hyperf-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mysql_data:
+  mongo_data:
+
+networks:
+  default:
+    name: hyperf-skeleton

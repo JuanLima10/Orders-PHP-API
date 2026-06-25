@@ -1,0 +1,135 @@
+{
+    "openapi": "3.0.0",
+    "paths": {
+        "/orders": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Listar pedidos",
+                "operationId": "db03f77d06ac6cd01fa48ae2ee143a08",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Criar pedido",
+                "operationId": "88469d25780fa46fe256ff8d46794d25",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Order"
+                            }
+                        }
+                    },
+                    "_content": {
+                        "$ref": "#/components/schemas/Order"
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    }
+                }
+            }
+        },
+        "/orders/{id}": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Buscar pedido",
+                "operationId": "03486b70ff1e23e745d89570f858eb04",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Atualizar pedido",
+                "operationId": "d0ecdc58c4408ffbe310914235d556a8",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Deletar pedido",
+                "operationId": "acf77aae70253895dd4333e0dd34aaa1",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Order": {
+                "required": [
+                    "product",
+                    "price"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1,
+                        "rules": null,
+                        "attribute": null
+                    },
+                    "product": {
+                        "type": "string",
+                        "example": "Notebook",
+                        "rules": null,
+                        "attribute": null
+                    },
+                    "price": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 1999.9,
+                        "rules": null,
+                        "attribute": null
+                    },
+                    "status": {
+                        "type": "string",
+                        "example": "pending",
+                        "rules": null,
+                        "attribute": null
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Orders",
+            "description": "Orders"
+        }
+    ]
+}
